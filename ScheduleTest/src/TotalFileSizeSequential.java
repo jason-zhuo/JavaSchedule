@@ -22,7 +22,7 @@ public class TotalFileSizeSequential {
 //	 
 //	return total;	 
 // }
- private long getTotalSizeOfFileInDir(final ExecutorService service, final File file) throws InterruptedException, ExecutionException, TimeoutException
+  long getTotalSizeOfFileInDir(final ExecutorService service, final File file) throws InterruptedException, ExecutionException, TimeoutException
  {
 	 List<Future<Long>> partialTotoalFutures = null;
 	 if(file.isFile()) return file.length();
@@ -52,22 +52,6 @@ public class TotalFileSizeSequential {
 	  }
 	return total;	 
  }
- public static void main (final String args[]) throws InterruptedException, ExecutionException, TimeoutException
- {
-	 final long start = System.nanoTime();
-	 final ExecutorService service= Executors.newFixedThreadPool(100);
-	 long total=0;
-	 try 
-	 {
-		  total = new TotalFileSizeSequential().getTotalSizeOfFileInDir(service,new File("/home/zzl/1TestArea"));
-	 }finally
-	 {
-		 service.shutdown();
-	 }
-	 
-	 final long end = System.nanoTime();
-	 System.out.println("Toal size : "+ total);
-	 System.out.println("Time taken  : "+ (end -start)/1.0e9);
- }
+
  
 }
